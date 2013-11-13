@@ -59,7 +59,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
 
     respond_to do |format|
-      if @post.update_attributes(params[:post])
+      if @post.update_attributes pick(params[:post], :title, :content)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
       else
@@ -67,6 +67,14 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def pick(hash, *keys)
+    filtered = {}
+    hash.each do |key, value| 
+      filtered[key.to_sym] = value if keys.include?(key.to_sym) 
+    end
+    filtered
   end
 
   # DELETE /posts/1
