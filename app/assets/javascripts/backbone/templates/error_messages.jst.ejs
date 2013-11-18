@@ -1,0 +1,9 @@
+<% if(this.model.get("errors")) { %>
+  <ul>
+    <% _.each(this.model.get("errors"), function(error, attr) { %>
+      <li>
+        <%= attr + ": " + error %>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>

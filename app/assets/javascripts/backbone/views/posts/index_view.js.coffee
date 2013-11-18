@@ -6,6 +6,7 @@ class Blog.Views.Posts.IndexView extends Backbone.View
   events:
     "keyup #search input" : "search_posts"
     "change #order select" : "reorder_posts"
+    "click #get_total_records" : "total_records"
 
   reorder_posts: (e) ->
     order = $(e.target).val()
@@ -23,9 +24,17 @@ class Blog.Views.Posts.IndexView extends Backbone.View
     @$el.find('tbody tr').remove()
     @options.posts.each(@addOne)
   addOne: (post) =>
-    view = new Blog.Views.Posts.PostView({model : post})
-    @$("tbody").append(view.render().el)
+    if post.id
+      view = new Blog.Views.Posts.PostView({model : post})
+      @$("tbody").append(view.render().el)
   render: =>
     $(@el).html(@template(posts: @options.posts.toJSON() ))
     @addAll()
     return this
+  total_records: (e) =>
+    e.preventDefault()
+    $.ajax
+      url: "/posts"
+      dataType: "json"
+      success: (data) ->
+        $("#total_records").html(data["total_entries"])

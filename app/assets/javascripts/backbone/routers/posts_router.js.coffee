@@ -12,6 +12,7 @@ class Blog.Routers.PostsRouter extends Backbone.Router
     @view = new Blog.Views.Posts.NewView(collection: @posts)
     $("#posts").html(@view.render().el)
   index: ->
+    @posts.fetch()
     @view = new Blog.Views.Posts.IndexView(posts: @posts)
     $("#posts").html(@view.render().el)
     @paginatorView = new Blog.Views.PaginatedView({ collection : @posts })

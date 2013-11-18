@@ -3,6 +3,13 @@ class Blog.Models.Post extends Backbone.Model
   defaults:
     title: null
     content: null
+  initialize: ->
+    @on "invalid", (model, error) ->
+      $("#error_messages").html(error)
+
+  validate: (attrs, options) ->
+    if !attrs.title
+      "title should not be blank"  
 
 class Blog.Collections.PostsCollection extends Backbone.Collection
   model: Blog.Models.Post
