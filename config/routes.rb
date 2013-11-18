@@ -1,5 +1,9 @@
 Blog::Application.routes.draw do
-  resources :posts
+  resources :posts do
+    collection do
+      get 'search'
+    end
+  end
   root :to => 'posts#index'
 
   # The priority is based upon order of creation:

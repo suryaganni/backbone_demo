@@ -23,7 +23,8 @@ end
 
 gem 'jquery-rails'
 
-gem "rails-backbone"
+gem 'rails-backbone'
+gem 'kaminari'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

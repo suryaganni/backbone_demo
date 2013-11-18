@@ -1,0 +1,30 @@
+<ul>
+  <% if (page_active > 1) { %>
+      <li class="previus"><a href="#">«</a></li>
+  <% } %>
+  <div id="pages">
+    <% if (left_dots) {%>
+        <li><a href="#">1</a></li>
+        <li class="disabled"><a href="#">...</a></li>
+    <% } %>
+
+      <% for (var i = nav_begin; i <= nav_end; i++) { %> 
+          <li <% if (page_active == i) {%>  <%= 'class="active"' %> <% } %> ><a href="#"><%= i %></a></li> 
+      <% } %>
+    <% if (right_dots) {%>
+        <li class="disabled"><a href="#">...</a></li>
+        <li><a href="#"><%= page_count %></a></li>
+    <% } %>
+  </div>
+  <% if (page_active < page_count) { %>
+      <li class="next"><a  href="#">»</a></li>
+  <% } %>
+  <div id="per_pages">
+    Per page:
+    <a href="#">1</a> | 
+    <a href="#">2</a> | 
+    <a href="#">3</a> | 
+    <a href="#">5</a> |
+    <a href="#">100</a>
+  </div>
+</ul>

@@ -2,11 +2,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
-
+    order = params[:order] || 'title'
+    per_page = params[:per_page] || 5
+    page = params[:page] || 1
+    @posts = Post.order(order).search_in_posts(params[:query]).page(page).per(per_page)
+    @total_entries = @posts.total_count
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @posts }
+      format.json { render(json: { total_entries: @total_entries, results: @posts }) }
     end
   end
 
