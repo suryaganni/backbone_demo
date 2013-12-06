@@ -1,4 +1,4 @@
-Blog::Application.routes.draw do
+BackboneDemo::Application.routes.draw do
   resources :posts do
     collection do
       get 'search'
